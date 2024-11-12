@@ -21,8 +21,10 @@ public class AsesoriaEncuestaDTO {
     Timestamp date_Fecha_Asignacion;
     Timestamp timestap_Fecha_Actualizacion;
     Boolean boolean_Respondida;
+    String str_NB_Asesor;
+    String date_Fecha_Asesoria;
 
-    public static AsesoriaEncuestaDTO fromVO (AsesoriaEncuestaVO asesoriaEncuestaVO){
+    public static AsesoriaEncuestaDTO fromVO (AsesoriaEncuestaVO asesoriaEncuestaVO, String date_Fecha_Asesoria, String str_NB_Asesor){
         return AsesoriaEncuestaDTO.builder()
                 .id_Asesoria_Encuesta(asesoriaEncuestaVO.id_Asesoria_Encuesta)
                 .id_Asesoria_Asignacion(asesoriaEncuestaVO.int_id_Asesoria_Asignacion)
@@ -30,6 +32,8 @@ public class AsesoriaEncuestaDTO {
                 .date_Fecha_Asignacion(asesoriaEncuestaVO.date_Fecha_Asignacion)
                 .timestap_Fecha_Actualizacion(asesoriaEncuestaVO.timestap_Fecha_Actualizacion)
                 .boolean_Respondida(asesoriaEncuestaVO.boolean_Respondida)
+                .str_NB_Asesor(str_NB_Asesor)
+                .date_Fecha_Asesoria(date_Fecha_Asesoria)
                 .build();
     }
 

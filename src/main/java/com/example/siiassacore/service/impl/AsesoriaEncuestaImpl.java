@@ -4,6 +4,7 @@ import com.example.siiassacore.model.asesoriaEncuesta.AsesoriaEncuestaDTO;
 import com.example.siiassacore.model.asesoriaEncuesta.AsesoriaEncuestaVO;
 import com.example.siiassacore.repository.AsesoriaEncuestaRepository;
 import com.example.siiassacore.service.AsesoriaEncuestaService;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -41,14 +42,30 @@ public class AsesoriaEncuestaImpl implements AsesoriaEncuestaService {
         LOG_debug.info("Parametros2...."+ idProgramaEducativo+ " "+str_Periodo + " "+str_Matricula);
         try {
             List<AsesoriaEncuestaDTO> encuestaDTOS = new ArrayList<>();
-            List<AsesoriaEncuestaVO> listAsesorias = encuestaRepository.listaEncuestaSeleccion(str_Matricula,str_Periodo,idProgramaEducativo);
+            List<Object[]> listAsesorias = encuestaRepository.listaEncuestaSeleccion(str_Matricula,str_Periodo,idProgramaEducativo);
 
-            listAsesorias.forEach(la -> encuestaDTOS.add(AsesoriaEncuestaDTO.fromVO(la)));
+
+            listAsesorias.forEach(la -> {
+                LOG_debug.info("LAaaaaa " + la.length);
+                LOG_debug.info("entra ");
+                AsesoriaEncuestaVO encuestaVO =  (AsesoriaEncuestaVO) la[0];
+                LOG_debug.info("entra2 ");
+                String fecha =  String.valueOf( la[1]);
+                LOG_debug.info("emcuesta "+encuestaVO);
+                LOG_debug.info("Fecha "+fecha);
+
+                String nombre =  String.valueOf( la[2]);
+                LOG_debug.info("Nombre "+nombre);
+
+                encuestaDTOS.add(AsesoriaEncuestaDTO.fromVO(encuestaVO, fecha.toString(),nombre.toString()));
+                LOG_debug.info("dto "+encuestaDTOS);
+
+            });
 
             LOG_debug.info("juasjuasjuas"+encuestaDTOS);
             return encuestaDTOS;
         }catch (Exception e){
-
+            LOG_debug.info("Exception "+e.getMessage());
         }
         return null;
     }

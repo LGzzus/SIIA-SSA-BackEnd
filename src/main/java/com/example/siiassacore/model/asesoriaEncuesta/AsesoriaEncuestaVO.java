@@ -35,4 +35,9 @@ public class AsesoriaEncuestaVO {
     @Column(name = "boolean_Respondida")
     Boolean boolean_Respondida;
 
+    @Transient
+    private String date_dia_asesoria;
+
+    @Transient
+    private String str_NB_Asesor;
 }
